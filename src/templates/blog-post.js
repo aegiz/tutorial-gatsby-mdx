@@ -10,14 +10,8 @@ import { rhythm, scale } from "../utils/typography"
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   // Data contains now mdx
   const post = data.mdx
-  console.log(data.mdx)
-  console.log(pageContext)
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
-  console.log("previous")
-  console.log(previous)
-  console.log("pnext")
-  console.log(next)
   return (
     <Layout location={location} title={siteTitle}>
       <SEO

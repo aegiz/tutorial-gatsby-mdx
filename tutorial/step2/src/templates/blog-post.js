@@ -8,16 +8,10 @@ import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
-  // const post = data.markdownRemark
+  // Data contains now mdx
   const post = data.mdx
-  console.log(data.mdx)
-  console.log(pageContext)
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
-  console.log("previous")
-  console.log(previous)
-  console.log("pnext")
-  console.log(next)
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
@@ -87,46 +81,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
 export default BlogPostTemplate
 
-// export const pageQuery = graphql`
-
-// query BlogPostBySlug($slug: String!) {
-//   site {
-//     siteMetadata {
-//       title
-//     }
-//   }
-//   markdownRemark(fields: { slug: { eq: $slug } }) {
-//     id
-//     excerpt(pruneLength: 160)
-//     html
-//     frontmatter {
-//       title
-//       date(formatString: "MMMM DD, YYYY")
-//       description
-//     }
-//   }
-// }
-// `
-
-// export const pageQuery = graphql`
-//   query BlogPostBySlug($slug: String!) {
-//     site {
-//       siteMetadata {
-//         title
-//       }
-//     }
-//     mdx(fields: { slug: { eq: $slug } }) {
-//       id
-//       excerpt(pruneLength: 160)
-//       html
-//       frontmatter {
-//         title
-//         description
-//       }
-//     }
-//   }
-// `
-
+// Query the MDX instead of Md
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
