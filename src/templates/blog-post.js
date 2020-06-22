@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -7,10 +8,16 @@ import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
-  const post = data.markdownRemark
+  // const post = data.markdownRemark
+  const post = data.mdx
+  console.log(data.mdx)
+  console.log(pageContext)
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
-
+  console.log("previous")
+  console.log(previous)
+  console.log("pnext")
+  console.log(next)
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
@@ -47,7 +54,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           <Bio />
         </footer>
       </article>
-
+      <MDXRenderer>{post.body}</MDXRenderer>
       <nav>
         <ul
           style={{
@@ -80,6 +87,46 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
 export default BlogPostTemplate
 
+// export const pageQuery = graphql`
+
+// query BlogPostBySlug($slug: String!) {
+//   site {
+//     siteMetadata {
+//       title
+//     }
+//   }
+//   markdownRemark(fields: { slug: { eq: $slug } }) {
+//     id
+//     excerpt(pruneLength: 160)
+//     html
+//     frontmatter {
+//       title
+//       date(formatString: "MMMM DD, YYYY")
+//       description
+//     }
+//   }
+// }
+// `
+
+// export const pageQuery = graphql`
+//   query BlogPostBySlug($slug: String!) {
+//     site {
+//       siteMetadata {
+//         title
+//       }
+//     }
+//     mdx(fields: { slug: { eq: $slug } }) {
+//       id
+//       excerpt(pruneLength: 160)
+//       html
+//       frontmatter {
+//         title
+//         description
+//       }
+//     }
+//   }
+// `
+
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
@@ -87,13 +134,12 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
         description
       }
     }
