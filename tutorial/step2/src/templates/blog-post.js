@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
-  // Data contains now mdx
+  // const post = data.markdownRemark
   const post = data.mdx
   console.log(data.mdx)
   console.log(pageContext)
@@ -87,7 +87,46 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
 export default BlogPostTemplate
 
-// Query the MDX instead of Md
+// export const pageQuery = graphql`
+
+// query BlogPostBySlug($slug: String!) {
+//   site {
+//     siteMetadata {
+//       title
+//     }
+//   }
+//   markdownRemark(fields: { slug: { eq: $slug } }) {
+//     id
+//     excerpt(pruneLength: 160)
+//     html
+//     frontmatter {
+//       title
+//       date(formatString: "MMMM DD, YYYY")
+//       description
+//     }
+//   }
+// }
+// `
+
+// export const pageQuery = graphql`
+//   query BlogPostBySlug($slug: String!) {
+//     site {
+//       siteMetadata {
+//         title
+//       }
+//     }
+//     mdx(fields: { slug: { eq: $slug } }) {
+//       id
+//       excerpt(pruneLength: 160)
+//       html
+//       frontmatter {
+//         title
+//         description
+//       }
+//     }
+//   }
+// `
+
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
